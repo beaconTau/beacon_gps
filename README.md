@@ -26,6 +26,14 @@ Before running this, ensure that the `UBXOPTS` variable is defined [See `SETUP.s
 
 You can check the device configuration in several ways:
 
+### Check using gpsctl
+The device messaging should no longer be NMEA:
+
+```
+>> gpsctl /dev/ttyO4
+/dev/ttyO4 identified as a u-blox SW EXT CORE 3.01 (111141),HW 00080000.
+```
+
 ### Check enabled satellite consellations:
 ```
 >> ubxtool -p CFG-GNSS
