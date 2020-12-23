@@ -74,6 +74,6 @@ UBX-TIM-TP:
 ```
 [You may see 1 or 2 lines of `UBX-TIM-TP:` here]
 
-Note: TP message includes the qerr (quantization error) for the next PPS pulse. 
+Note: TP message includes the qerr (quantization error) for the subsequent PPS pulse. 
 For some reason, the TP messaging may take 10-15 minutes to show up on the output after configuration. 
 This probably has to do with obtaining a good gps lock.
