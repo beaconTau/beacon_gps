@@ -9,13 +9,7 @@ fi
 
 GPSON=`cat /sys/class/gpio/gpio22/value`
 
-if [ $GPSON == "1" ] 
-  echo "GPS IS ON!"
-else 
-  echo "GPS is OFF ($GPSON)" 
-  exit 1
-fi
-
+echo "GPS: $GPSON"
 
 
 if [ ! -d /sys/class/gpio/gpio47 ] ; then 
@@ -27,15 +21,9 @@ fi
 
 PPSON=`cat /sys/class/gpio/gpio47/value`
 
-if [ $PPSON == "1" ] 
-  echo "PPS IS ON!"
-else 
-  echo "PPS is OFF ($PPSON)" 
-  exit 1
-fi
+echo "PPS: $PPSON"
 
-
-ps aux | ps gpsd 
+ps aux | grep gpsd 
 
 
 
