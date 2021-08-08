@@ -1,3 +1,4 @@
 #! /bin/sh 
 
-ubxtool -g CFG-TP-USER_DELAY_TP1
+ubxtool -p CFG-TP5 -w 2  | grep CFG-TP5 -A 5
+
