@@ -20,5 +20,5 @@ fi
 
 stty -F /dev/ttyO4 57600
 sudo gpsd /dev/ttyO4 -F /var/run/gpsd.sock 
-sudo mkdir -p /data/gps  && chown rno-g:rno-g /data/gps
+sudo mkdir -p /data/gps  && sudo chown rno-g:rno-g /data/gps
 
