@@ -14,7 +14,7 @@ then
   if [[ $rev == "E" ]] 
   then 
     echo "Changing baud rate" 
-    ubxtool -s 9600 -S 57600 /dev/ttyGPS
+    ubxtool -s 9600 -S 57600 -f  /dev/ttyGPS
   fi
 fi
 
