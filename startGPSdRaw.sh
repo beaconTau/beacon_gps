@@ -6,19 +6,15 @@ sudo killall gpsd
 
 
 
-#if we have REVE, set speed to 57600 
-if [[ -f /REV ]] ; 
-then 
-  rev=`cat /REV` 
-  echo "rev is E" 
-  if [[ $rev == "E" ]] 
-  then 
-    echo "Changing baud rate" 
-    ubxtool -s 9600 -S 57600 -f  /dev/ttyGPS
-  fi
-fi
 
-stty -F /dev/ttyO4 57600
-sudo gpsd /dev/ttyO4 -F /var/run/gpsd.sock 
-sudo mkdir -p /data/gps  && sudo chown rno-g:rno-g /data/gps
+gps0=/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_016BD3C4-if00-port0
+gps1=/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_016BD3C4-if01-port0
+echo "Changing baud rate" 
+ubxtool -s 38400 -S 57600 -f $gps0
+ubxtool -s 38400 -S 57600 -f $gps1
+stty -F $gps0 57600 
+stty -F $gps1 57600 
+
+sudo gpsd $gps0 $gps1  -F /var/run/gpsd.sock 
+sudo mkdir -p /data/gps  && sudo chown beacon:beacon /data/gps
 
