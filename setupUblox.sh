@@ -1,21 +1,27 @@
 #!/bin/bash -e
 
+gps0=localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_016BD3C4-if00-port0
+gps1=localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_016BD3C4-if01-port0
 
-ubxtool -d NMEA #disable NMEA messages
-ubxtool -e BINARY #enable binary messages
 
-ubxtool -d BEIDOU
-ubxtool -d GALILEO
-ubxtool -d GLONASS
-ubxtool -d SBAS
-ubxtool -e GPS #enable only GPS constellation
+for gps in $gps0 $gps1 ; 
+do 
+ubxtool -d NMEA  $gps #disable NMEA messages
+ubxtool -e BINARY  $gps #enable binary messages
+
+ubxtool -d BEIDOU  $gps
+ubxtool -d GALILEO  $gps
+ubxtool -d GLONASS  $gps
+ubxtool -d SBAS  $gps
+ubxtool -e GPS  $gps #enable only GPS constellation
 
 #ubxtool -p CFG-GNSS #confirm enabled constellations
-ubxtool -e RAWX #enable raw measurement messages
-ubxtool -e PPS #enable timpulse0 [pps]
-ubxtool -e TP #enable tim-tp message
+ubxtool -e RAWX  $gps #enable raw measurement messages
+ubxtool -e PPS  $gps #enable timpulse0 [pps]
+ubxtool -e TP $gps #enable tim-tp message
 
 #ubxtool -w 4 | fgrep RAWX #confirm RAW messaging
 #ubxtool -w 4 | fgrep TP
 
+done
 
