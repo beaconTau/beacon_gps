@@ -1,1 +1,1 @@
-export UBXOPTS="-P 22.00"
+export UBXOPTS="-P 34.00"
