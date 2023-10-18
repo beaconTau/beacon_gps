@@ -1,0 +1,2 @@
+export CP2105_SERIAL=016BD316
+export GPSDATA_USER=rno-g

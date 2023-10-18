@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-gps0=localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_016BD3C4-if00-port0
-gps1=localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_016BD3C4-if01-port0
+source SETUP.sh
+gps0=localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_$CP2105_SERIAL-if00-port0
+gps1=localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_$CP2105_SERIAL-if01-port0
 
 
 for gps in $gps0 $gps1 ; 

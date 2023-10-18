@@ -1,0 +1,2 @@
+export CP2105_SERIAL=016BD3C4
+export GPSDATA_USER=beacon
