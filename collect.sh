@@ -1,9 +1,34 @@
 #!/bin/bash -e
 
 source SETUP.sh 
-WHICH=${1-0}
-SECS=${2-3600}
+SECS=${1-3600}
+now=`date -Is`
+ofile_f9p=/data/gps/$now.f9p.ubx
+ofile_f9t=/data/gps/$now.f9t.ubx
 
-ofile=/data/gps/if0${WHICH}-`date -Is`.ubx 
-gpspipe -R "-x $SECS" localhost:2947:/dev/serial/by-id/usb-Silicon_Labs_CP2105_Dual_USB_to_UART_Bridge_Controller_$CP2105_SERIAL-if0${WHICH}-port0 > $ofile && gzip $ofile 
+timeout $SECS ./grab-single-raw.sh $ZEDF9T > $ofile_f9t &
+pidf9t=$!
+timeout $SECS ./grab-single-raw.sh $ZEDF9P > $ofile_f9p &
+pidf9p=$!
 
+
+cleanup()  {
+	echo gzipping;
+	gzip $ofile_f9p;
+	gzip $ofile_f9t;
+	echo done;
+}
+
+
+interrupted() 
+{
+  echo interrupted ;
+  kill $pidf9t;
+  kill $pidf9p;
+  cleanup;
+}
+
+echo "Running for $SECS seconds" 
+trap interrupted INT
+wait 
+cleanup
